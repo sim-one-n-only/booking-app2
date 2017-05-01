@@ -6,7 +6,9 @@ app.controller("mainCntrl", ["$scope", function ($scope) {
 }])
 
 
-app.config(["$routeProvider", function ($routeProvider) {
+app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
+
     $routeProvider
         .when("/home", {
             templateUrl: "components/home/home.html",

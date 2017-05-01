@@ -3,7 +3,7 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function($scope, $uibModal, $log) {
+app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function ($scope, $uibModal, $log) {
     // activate();
     //
     // function activate() {
@@ -15,24 +15,24 @@ app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function($scope, 
     $scope.showForm = function () {
         $scope.message = "Show Form Button Clicked";
         console.log($scope.message);
+        var modalInstance = $uibModal.open({
+            templateUrl: "components/bookings/modal.html",
+            controller: "modalInstanceCntrl",
+            scope: $scope,
+            resolve: {
+                bookingForm: function () {
+                    return $scope.bookingForm;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (newBooking) {
+            $scope.selected = newBooking;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
 
-    var modalInstance = $uibModal.open({
-        templateUrl: "components/bookings/modal.html",
-        controller: "modalInstanceCntrl",
-        scope: $scope,
-        resolve: {
-            bookingForm: function () {
-                return $scope.bookingForm;
-            }
-        }
-    });
-
-    modalInstance.result.then(function (newBooking) {
-        $scope.selected = newBooking;
-    }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-    });
 
 }])
 
