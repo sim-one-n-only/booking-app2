@@ -3,7 +3,7 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("bookingCntrl", ["$scope", "$uibModal", "scheduleService", function($scope, scheduleService, ModalService) {
+app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function($scope, $uibModal, $log) {
     // activate();
     //
     // function activate() {
@@ -11,55 +11,35 @@ app.controller("bookingCntrl", ["$scope", "$uibModal", "scheduleService", functi
     //         console.log("results", response);
     //     });
     // }
-
-    var $ctrl = this;
-
-    $ctrl.animationsEnabled = true;
-
-    $ctrl.open = function (size) {
-        var modalInstance = $uibModal.open ({
-            animation: $ctrl.animationsEnabled,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'modal.html',
-            controller: 'modalInstanceCntrl',
-            controllerAs: '$ctrl',
-            size: size,
-            resolve: {
-                items: function () {
-                    return "I hope this works!"
-                }
-            }
-        });
-
-
-        modalInstance.result.then(function (selectedItem) {
-            $ctrl.selected = selectedItem;
-        }, function () {
-            $log.info('modal-component dismissed at: ' + new Date());
-        });
-    };
-
-    $ctrl.openComponentModal = function () {
-        var modalInstance = $uibModal.open({
-            animation: $ctrl.animationsEnabled,
-            componenet: 'modalComponent',
-            resolve: {
-                items: function () {
-                    console.log('this works!')
-                    $return
-                }
-            }
-        });
-
-
-        $ctrl.toggleAnimation = function () {
-            $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-        };
+    //
+    $scope.showForm = function () {
+        $scope.message = "Show Form Button Clicked";
+        console.log($scope.message);
     }
+
+    var modalInstance = $uibModal.open({
+        templateUrl: "modal.html",
+        controller: "modalInstanceCntrl",
+        scope: $scope,
+        resolve: {
+            bookingForm: function () {
+                return $scope.bookingForm;
+            }
+        }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+    }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+    });
+
+
 
 
 }])
+
+
 
 
 

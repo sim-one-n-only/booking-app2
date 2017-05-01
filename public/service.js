@@ -13,30 +13,30 @@ app.service("scheduleService", ["$http", "tokenService", function ($http, tokenS
                 response.data[i].date = new Date(response.data[i].date);
             }
             return response.data;
-        })
+        });
     };
 
     this.postBookings = function (newSchedule) {
         return $http.post("/api/booking/", newSchedule).then(function (response) {
             return response.data;
-        })
+        });
     };
 
     this.editBooking = function (schedule) {
         return $http.put("/api/booking/", + schedule._id).then(function(response) {
             return response.dataset;
-        })
+        });
     };
 
     this.deleteBooking = function (schedule) {
         return $http.delete("/api/booking/" + schedule._id).then(function (response) {
             return response.data;
-        })
+        });
     };
 
     this.getContent = function(date) {
-        return $http.get("/api/booking/content/" + date).then(function (response) {
+        return $http.get("/api/booking/" + date).then(function (response) {
             return response.data;
-        })
-    }
+        });
+    };
 }]);
