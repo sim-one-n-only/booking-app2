@@ -1,0 +1,20 @@
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+var scheduleSchema = new Schema ({
+    companyName: String,
+    serviceRequested: String,
+    location: String,
+    date: {type: Date},
+    time: Number,
+    phoneNumber: Number,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
+})
+
+var Schedule = mongoose.model("Schedule", scheduleSchema);
+
+module.exports = Schedule;
