@@ -1,14 +1,15 @@
 <!--Modal-->
 <div ng-controller="modalInstanceCntrl" class="modal">
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
-                aria-hidden="true">$times;
-        </button>
-        <h2 class="modal-title">Add New Booking</h2>
-    </div>
+    <script type="text/ng-template" id="modal.html">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">$times;
+            </button>
+            <h2 class="modal-title">Add New Booking</h2>
+        </div>
 
-    <form name="form.bookingForm" ng-submit="submitForm()" novalidate>
-        <div class="modal-body">
+        <form name="form.bookingForm" ng-submit="submitForm()" novalidate>
+            <div class="modal-body">
                 <div class="form-group">
                     <label>Company:</label>
                     <input type="text" id="company" class="form-control" ng-model="schedule.companyName">
@@ -45,6 +46,7 @@
                     </button>
                     <button class="btn btn-warning" ng-click="$ctrl.cancel()" data-dismiss="modal">Cancel</button>
                 </div>
-        </div>
-    </form>
+            </div>
+        </form>
+    </script>
 </div>

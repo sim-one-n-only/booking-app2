@@ -15,10 +15,10 @@ app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function($scope, 
     $scope.showForm = function () {
         $scope.message = "Show Form Button Clicked";
         console.log($scope.message);
-    }
+    };
 
     var modalInstance = $uibModal.open({
-        templateUrl: "modal.html",
+        templateUrl: "components/bookings/modal.html",
         controller: "modalInstanceCntrl",
         scope: $scope,
         resolve: {
@@ -28,14 +28,11 @@ app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function($scope, 
         }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
+    modalInstance.result.then(function (newBooking) {
+        $scope.selected = newBooking;
     }, function () {
         $log.info('Modal dismissed at: ' + new Date());
     });
-
-
-
 
 }])
 

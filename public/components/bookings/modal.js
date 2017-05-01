@@ -3,11 +3,11 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", "bookingForm", function ($scope, $uib$ModalInstance, bookingForm) {
+app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", "bookingForm", function ($scope, $uibModalInstance, bookingForm) {
     $scope.form = {};
 
     $scope.submitForm = function () {
-        if ($scope.form.userForm.$valid) {
+        if ($scope.form.bookingForm.$valid) {
             console.log('user form is in scope');
             $uibModalInstance.close('closed');
         } else {
