@@ -3,20 +3,23 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", function ($scope, $uibModal, $log) {
-    // activate();
-    //
-    // function activate() {
-    //     scheduleService.getBookings().then(function (response) {
-    //         console.log("results", response);
-    //     });
-    // }
-    //
+app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", "scheduleService", function ($scope, $uibModal, $log, scheduleService) {
+    activate();
+
+    $scope.bookings = [];
+
+    function activate() {
+        scheduleService.getBookings().then(function (response) {
+            console.log("results", response);
+            $scope.bookings.push(response);
+        });
+    }
+
     $scope.showForm = function () {
         $scope.message = "Show Form Button Clicked";
         console.log($scope.message);
         var modalInstance = $uibModal.open({
-            templateUrl: "components/bookings/modal.html",
+            templateUrl: "modal.html",
             controller: "modalInstanceCntrl",
             scope: $scope,
             resolve: {

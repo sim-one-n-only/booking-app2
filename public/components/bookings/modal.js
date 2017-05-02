@@ -3,7 +3,14 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", "bookingForm", function ($scope, $uibModalInstance, bookingForm) {
+app.directive("bookingModal", [function () {
+    return {
+        restrict: "E",
+        templateUrl: "components/bookings/modal.html"
+    };
+}]);
+
+app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", function ($scope, $uibModalInstance) {
     $scope.form = {};
 
     $scope.submitForm = function () {
@@ -11,14 +18,11 @@ app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", "bookingFor
             console.log('user form is in scope');
             $uibModalInstance.close('closed');
         } else {
-            console.log('userform is not in scope');
+            console.log('user form is not in scope');
         }
     };
 
     $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
+        $uibModalInstance.dismiss('closed');
     };
-
-}
-
-])
+}]);

@@ -1,4 +1,4 @@
-var app = angular.module("bookingApp", ["ngRoute", "bookingApp.Auth", "ngAnimate", "ngSanitize", "ngMaterial", "materialCalendar", "ui.bootstrap", "ui.bootstrap.tpls"]);
+var app = angular.module("bookingApp", ["ngRoute", "bookingApp.Auth", "ngAnimate", "ngSanitize", "ngMaterial", "materialCalendar", "ui.bootstrap"]);
 
 app.controller("mainCntrl", ["$scope", function ($scope) {
 
