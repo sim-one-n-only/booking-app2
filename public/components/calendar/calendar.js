@@ -4,32 +4,32 @@
 var app = angular.module("bookingApp");
 
 
-app.controller("calendarCntrl", ["$scope", "scheduleService", "$filter", "$log", "$document", function ($scope, scheduleService, $filter, $log, $document) {
+app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "$log", "$uibModal", "$document", function ($scope, $q, scheduleService, $filter, $log, $uibModal, $document) {
 
-
-    // activate();
-    function activate() {
-        scheduleService.getBookings().then(function (response) {
-            $scope.events = response;
-        });
-    }
-
+    // function activate() {
+    //     // var deferred = $q.defer();
+    //     return scheduleService.getBookings();
+    //     // return deferred.promise;
+    // }
+    $scope.events = [];
+    var prom = scheduleService.getBookings().then(function(data) {
+        $scope.events = data;
+        return data;
+    });
     $scope.setDayContent = function (date) {
-
-        return scheduleService.getBookings().then(function(data) {
-            return "There's an event on this day"
+        return prom.then(function (data) {
+            var output = "";
+            for (var i = 0; i < data.length; i++) {
+                if (date.toString() === data[i].date.toString()) {
+                    output += "<p>" + data[i].companyName + "</p>";
+                }
+            }
+            return output;
         });
 
-
-        for (var i = 0; i < $scope.events.length; i++) {
-            if (date === $scope.events[i].date) {
-                return "<p>There is an event today!</p>"
-            }
-        }
-    }
+    };
 
     $scope.dayFormat = "d";
-
 
     $scope.selectedDate = null;
     $scope.firstDayOfWeek = 0;
@@ -37,9 +37,40 @@ app.controller("calendarCntrl", ["$scope", "scheduleService", "$filter", "$log",
         $scope.direction = direction;
     };
     $scope.dayClick = function (date) {
-        $scope.msg = "You clicked " + $filter("date")(date, "MMM d, y h:mm:ss a Z");
-        console.log(date);
+
+        for (var i = 0; i < $scope.events.length; i++) {
+            if (date.toString() === $scope.events[i].date.toString()) {
+                console.log($scope.events[i].companyName);
+            }
+        }
+
+        var modalInstance = $uibModal.open({
+            template: "<p></p>",
+            controller: "calendarModalInstanceCntrl",
+            scope: $scope,
+            resolve: {
+                events: function () {
+                    return $scope.events[i].companyName;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('modal-component dismissed');
+        });
     };
+
+        //
+        // $scope.events.forEach(function(event) {
+        //     if (date.toString() === event.date.toString()) {
+        //         console.log(event.companyName);
+        //     }
+        // });
+
+
+
     $scope.prevMonth = function (data) {
         $scope.msg = "You clicked (prev) month " + data.month + ", " + data.year;
     };
@@ -48,40 +79,6 @@ app.controller("calendarCntrl", ["$scope", "scheduleService", "$filter", "$log",
     };
 
 
-    // console.log(date);
-    // return "<ul><li>Test</li></ul>";
-    // if(!content){
-    //     content = "<p></p>"
-    // }
-    // You would inject any HTML you wanted for
-    // that particular date here.
+}])
 
-    // date = new Date(date);
-    // date = date.toString();
-    // console.log(date);
-
-
-    // return scheduleService.getBookings("/booking/content?date="+date).then(function(response){
-    //     if (!response.data){
-    //         return '<p>'
-    //     }
-    //     return '<p>${response.data}</p>';
-
-    // })
-
-    // $scope.setDayContent = function(date) {
-    //     scheduleService.getBookings().then(function (response) {
-    //
-    //
-    //         for(var i = 0; i < events.length; i++) {
-    //             if(date === events[i].date) {
-    //                 console.log("match");
-    //             }
-    //         }
-    //
-    //
-    //     })
-    //
-    // };
-}]);
 

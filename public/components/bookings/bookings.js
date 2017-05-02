@@ -3,63 +3,68 @@
  */
 var app = angular.module("bookingApp");
 
-app.controller("bookingCntrl", ["$scope", "$uibModal", "scheduleService", function($scope, scheduleService, ModalService) {
-    // activate();
-    //
-    // function activate() {
-    //     scheduleService.getBookings().then(function (response) {
-    //         console.log("results", response);
-    //     });
+app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", "scheduleService", function ($scope, $uibModal, $log, scheduleService) {
+    activate();
+
+    $scope.bookings = [];
+
+    function activate() {
+        scheduleService.getBookings().then(function (response) {
+
+            console.log("results", response);
+            return $scope.bookings = response;
+            // console.log($scope.bookings);
+        });
+    }
+
+    $scope.postBooking = function (newSchedule) {
+        scheduleService.postBookings(newSchedule).then(function () {
+            $scope.bookings.push(newSchedule);
+            console.log($scope.bookings);
+        })
+        $scope.newSchedule = {};
+    }
+
+    // $scope.edit = function (schedule, index) {
+    //     scheduleService.editBooking(schedule, index).then(function () {
+    //         return $scope.bookings;
+    //     })
     // }
 
-    var $ctrl = this;
+    $scope.delete = function (index, id) {
+        scheduleService.deleteBooking(id).then(function () {
+            $scope.bookings.splice($scope.bookings.indexOf(index, 1));
+            console.log($scope.bookings);
+        });
+        };
 
-    $ctrl.animationsEnabled = true;
 
-    $ctrl.open = function (size) {
-        var modalInstance = $uibModal.open ({
-            animation: $ctrl.animationsEnabled,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'modal.html',
-            controller: 'modalInstanceCntrl',
-            controllerAs: '$ctrl',
-            size: size,
+
+    $scope.showForm = function () {
+        $scope.message = "Show Form Button Clicked";
+        console.log($scope.message);
+        var modalInstance = $uibModal.open({
+            templateUrl: "modal.html",
+            controller: "modalInstanceCntrl",
+            scope: $scope,
             resolve: {
-                items: function () {
-                    return "I hope this works!"
+                bookingForm: function () {
+                    return $scope.bookingForm;
                 }
             }
         });
 
-
-        modalInstance.result.then(function (selectedItem) {
-            $ctrl.selected = selectedItem;
+        modalInstance.result.then(function (newBooking) {
+            $scope.selected = newBooking;
         }, function () {
-            $log.info('modal-component dismissed at: ' + new Date());
+            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
-    $ctrl.openComponentModal = function () {
-        var modalInstance = $uibModal.open({
-            animation: $ctrl.animationsEnabled,
-            componenet: 'modalComponent',
-            resolve: {
-                items: function () {
-                    console.log('this works!')
-                    $return
-                }
-            }
-        });
-
-
-        $ctrl.toggleAnimation = function () {
-            $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-        };
-    }
-
 
 }])
+
+
 
 
 

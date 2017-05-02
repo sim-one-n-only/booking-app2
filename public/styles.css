@@ -1,5 +1,6 @@
 #custom-bootstrap-menu.navbar-default .navbar-brand {
     color: rgba(119, 119, 119, 1);
+
 }
 #custom-bootstrap-menu.navbar-default {
     font-size: 16px;
@@ -41,5 +42,26 @@
 }
 
 #brand {
-    width: 50px;
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+.card-img-top {
+    width: 100px;
+}
+
+.cards {
+    display: inline-block;
+    width: 250px;
+    margin: 15px;
+    /*margin-left: 90px;*/
+}
+
+#bookingTitle {
+    text-align: center;
+}
+
+#addBookingButton {
+    text-align: center;
 }
