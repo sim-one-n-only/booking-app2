@@ -4,7 +4,7 @@
 var app = angular.module("bookingApp");
 
 
-app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "$log", "$document", function ($scope, $q, scheduleService, $filter, $log, $document) {
+app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "$log", "$uibModal", "$document", function ($scope, $q, scheduleService, $filter, $log, $uibModal, $document) {
 
     // function activate() {
     //     // var deferred = $q.defer();
@@ -44,19 +44,41 @@ app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "
             }
         }
 
+        var modalInstance = $uibModal.open({
+            template: "<p></p>",
+            controller: "calendarModalInstanceCntrl",
+            scope: $scope,
+            resolve: {
+                events: function () {
+                    return $scope.events[i].companyName;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('modal-component dismissed');
+        });
+    };
+
         //
         // $scope.events.forEach(function(event) {
         //     if (date.toString() === event.date.toString()) {
         //         console.log(event.companyName);
         //     }
         // });
-    };
+
+
+
     $scope.prevMonth = function (data) {
         $scope.msg = "You clicked (prev) month " + data.month + ", " + data.year;
     };
     $scope.nextMonth = function (data) {
         $scope.msg = "You clicked (next) month " + data.month + ", " + data.year;
     };
+
+
 }])
-;
+
 

@@ -10,10 +10,35 @@ app.controller("bookingCntrl", ["$scope", "$uibModal", "$log", "scheduleService"
 
     function activate() {
         scheduleService.getBookings().then(function (response) {
+
             console.log("results", response);
-            $scope.bookings.push(response);
+            return $scope.bookings = response;
+            // console.log($scope.bookings);
         });
     }
+
+    $scope.postBooking = function (newSchedule) {
+        scheduleService.postBookings(newSchedule).then(function () {
+            $scope.bookings.push(newSchedule);
+            console.log($scope.bookings);
+        })
+        $scope.newSchedule = {};
+    }
+
+    // $scope.edit = function (schedule, index) {
+    //     scheduleService.editBooking(schedule, index).then(function () {
+    //         return $scope.bookings;
+    //     })
+    // }
+
+    $scope.delete = function (index, id) {
+        scheduleService.deleteBooking(id).then(function () {
+            $scope.bookings.splice($scope.bookings.indexOf(index, 1));
+            console.log($scope.bookings);
+        });
+        };
+
+
 
     $scope.showForm = function () {
         $scope.message = "Show Form Button Clicked";

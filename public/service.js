@@ -3,11 +3,9 @@
  */
 var app = angular.module("bookingApp");
 
-app.service("scheduleService", ["$http", "tokenService", function ($http, tokenService) {
+app.service("scheduleService", ["$http", "tokenService", function ($http) {
 
     this.getBookings = function () {
-        // var token = tokenService.getToken();
-        // $http.defaults.headers.common['Authorization'] = token;
         return $http.get("/api/booking").then(function(response) {
             for (var i = 0; i < response.data.length; i++) {
                 response.data[i].date = new Date(response.data[i].date);
@@ -24,12 +22,12 @@ app.service("scheduleService", ["$http", "tokenService", function ($http, tokenS
 
     this.editBooking = function (schedule) {
         return $http.put("/api/booking/", + schedule._id).then(function(response) {
-            return response.dataset;
+            return response.data;
         });
     };
 
-    this.deleteBooking = function (schedule) {
-        return $http.delete("/api/booking/" + schedule._id).then(function (response) {
+    this.deleteBooking = function (id) {
+        return $http.delete("/api/booking/" + id).then(function (response) {
             return response.data;
         });
     };

@@ -25,4 +25,6 @@ app.controller("modalInstanceCntrl", ["$scope", "$uibModalInstance", function ($
     $scope.cancel = function () {
         $uibModalInstance.dismiss('closed');
     };
+
+
 }]);

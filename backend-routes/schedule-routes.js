@@ -31,7 +31,7 @@ scheduleRoute
     })
 
     .delete("/:id", function (req, res) {
-        Schedule.findByIdAndRemove(req.params.id, req.body, function (err, deletedSchedule) {
+        Schedule.findByIdAndRemove(req.params.id, function (err, deletedSchedule) {
             res.send(deletedSchedule);
         })
     });
