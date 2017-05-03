@@ -1,12 +1,15 @@
 /**
- * Created by sim_one_n_only on 4/26/17.
+ * Created by sim_one_n_only on 5/3/17.
  */
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
-    firstName: String,
-    lastName: String,
+var companySchema = new Schema({
+    companyName: String,
+    businessType: {
+        type: String,
+        required: true
+    },
     email: String,
     username: {
         type: String,
@@ -19,10 +22,9 @@ var userSchema = new Schema({
         required: true
     },
     admin: {
-        type: Boolean,
+        type:Boolean,
         default: false
     }
 })
 
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Company", companySchema);

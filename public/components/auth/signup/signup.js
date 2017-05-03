@@ -13,11 +13,13 @@ app.controller("signupCntrl", ["$scope", "$location", "userService", function ($
             userService.signup(user).then(function (response) {
                 // $location.href = "#/login";
                 $location.path("/login");
-
-
             }, function (response) {
                 alert("There was a problem: " + response.data);
-            })
+            });
         }
-    }
-}])
+    };
+
+    $scope.companySignup = function () {
+        $location.path('/company-signup');
+    };
+}]);

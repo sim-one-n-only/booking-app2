@@ -1,4 +1,4 @@
-var app = angular.module("bookingApp", ["ngRoute", "bookingApp.Auth", "ngAnimate", "ngSanitize", "ngMaterial", "materialCalendar", "ui.bootstrap"]);
+var app = angular.module("bookingApp", ["ngRoute", "bookingApp.Auth", "bookingApp.companyAuth", "ngAnimate", "ngSanitize", "ngMaterial", "materialCalendar", "ui.bootstrap"]);
 
 app.controller("mainCntrl", ["$scope", function ($scope) {
 
@@ -6,9 +6,7 @@ app.controller("mainCntrl", ["$scope", function ($scope) {
 }])
 
 
-app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-    $locationProvider.hashPrefix('');
-
+app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
         .when("/home", {
             templateUrl: "components/home/home.html",
@@ -30,4 +28,3 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
         })
 
 }])
-

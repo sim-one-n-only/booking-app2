@@ -18,7 +18,7 @@ app.config(["$routeProvider", function ($routeProvider) {
         .when("/logout", {
             templateUrl: "components/auth/logout/logout.html",
             controller: "logoutCntrl"
-        })
+        });
 }]);
 
 app.service("tokenService", [function () {
@@ -29,13 +29,13 @@ app.service("tokenService", [function () {
         console.log(localStorage[userToken]);
     };
 
-    this.getToken = function (token) {
+    this.getToken = function () {
         return localStorage[userToken];
     };
 
     this.removeToken = function () {
         localStorage.removeItem(userToken);
-    }
+    };
 }]);
 
 app.service("userService", ["$http", "$location", "tokenService", function ($http, $location, tokenService) {
@@ -47,7 +47,7 @@ app.service("userService", ["$http", "$location", "tokenService", function ($htt
         return $http.post("/auth/login", user).then(function (response) {
             tokenService.setToken(response.data.token);
             return response;
-        })
+        });
     };
 
     this.logout = function () {
@@ -57,7 +57,7 @@ app.service("userService", ["$http", "$location", "tokenService", function ($htt
 
     this.isAuthenticated = function () {
         return !!tokenService.getToken();
-    }
+    };
 }])
 
 app.service("authInterceptor", ["$q", "$location", "tokenService", function ($q, $location, tokenService) {

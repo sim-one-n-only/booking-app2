@@ -27,6 +27,7 @@ mongoose.connect(config.database, function (err) {
 })
 
 app.use("/auth", require("./backend-routes/auth-route"));
+app.use("/company-auth", require("./backend-routes/company-route"));
 
 app.listen(port, function () {
     console.log("you're app is listening on port " + port)

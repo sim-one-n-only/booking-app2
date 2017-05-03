@@ -24,6 +24,7 @@ app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "
                     output += "<p>" + data[i].companyName + "</p>";
                 }
             }
+            console.log(output);
             return output;
         });
 
@@ -37,28 +38,33 @@ app.controller("calendarCntrl", ["$scope", "$q", "scheduleService", "$filter", "
         $scope.direction = direction;
     };
     $scope.dayClick = function (date) {
-
-        for (var i = 0; i < $scope.events.length; i++) {
-            if (date.toString() === $scope.events[i].date.toString()) {
-                console.log($scope.events[i].companyName);
-            }
-        }
-
+        $scope.message = "Show Form Button Clicked";
+        console.log($scope.message);
         var modalInstance = $uibModal.open({
-            template: "<p></p>",
+            templateUrl: "calendar-modal.html",
             controller: "calendarModalInstanceCntrl",
             scope: $scope,
             resolve: {
-                events: function () {
-                    return $scope.events[i].companyName;
+                match: function () {
+                    $scope.match = [];
+                    for(var i = 0; i < $scope.events.length; i++) {
+                        if (date.toString() === $scope.events[i].date.toString()) {
+                            console.log(date);
+                            $scope.match.push($scope.events[i]);
+                            console.log($scope.match);
+                        }
+                    }
+                    return $scope.match;
+
                 }
+
             }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
+        modalInstance.result.then(function (date) {
+            $scope.selected = date;
         }, function () {
-            $log.info('modal-component dismissed');
+            $log.info('Modal dismissed');
         });
     };
 

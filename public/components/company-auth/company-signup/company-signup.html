@@ -1,15 +1,18 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1>Signup</h1>
+        <h1>Company Signup</h1>
 
         <form>
             <div class="form-group">
-                <label for="name">First Name</label>
-                <input type="text" id="name" class="form-control" ng-model="user.firstname">
+                <label for="name">Company Name</label>
+                <input type="text" id="companyName" class="form-control" ng-model="company.companyName">
             </div>
 
             <div class="form-group">
-                <label for="name">Last Name</label>
+                <label for="name">Business Type</label>
+                <select class="form-control" ng-model="company.businessType">
+                    <option>H</option>
+                </select>
                 <input type="text" id="name" class="form-control" ng-model="user.lastname">
             </div>
 
@@ -33,8 +36,7 @@
                 <input type="password" id="passwordRepeat" class="form-control" ng-model="passwordRepeat">
                 <span class="text-danger" ng-show="passwordMessage">{{passwordMessage}}</span>
             </div>
-            <button class="left-block btn btn-primary btn-lg" ng-click="signup(user)">Signup</button>
-            <button class="right-block btn btn-link btn-lg" ng-click="companySignup()">Company Signup</button>
+            <button class="center-block btn btn-primary btn-lg" ng-click="signup(company)">Signup</button>
         </form>
     </div>
 </div>
