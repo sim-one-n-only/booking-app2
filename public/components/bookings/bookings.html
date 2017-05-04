@@ -15,7 +15,7 @@
                     <p class="card-text">{{booking.serviceRequested}}</p>
                     <p class="card-text">{{booking.date | date}}</p>
                     <p class="card-text">
-                        <small class="text-muted">{{booking.time}}</small>
+                        <small class="text-muted">{{booking.time || time}}</small>
                     </p>
                     <button class="btn btn-sm btn-warning" ng-click="delete($index, booking._id)">Delete</button>
                     <!--<button class="btn btn-sm btn-primary" ng-click="edit()">Edit</button>-->

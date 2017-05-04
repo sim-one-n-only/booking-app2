@@ -8,7 +8,7 @@ app.directive("navbar", ["userService", function (userService) {
         templateUrl: "components/navbar/navbar.html",
         link: function (scope) {
             scope.userService = userService;
-            scope.comp
+
         }
     };
 }]);

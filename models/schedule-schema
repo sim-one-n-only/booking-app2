@@ -6,7 +6,7 @@ var scheduleSchema = new Schema ({
     serviceRequested: String,
     location: String,
     date: {type: Date},
-    time: Number,
+    time: String,
     phoneNumber: Number,
     user: {
         type: Schema.Types.ObjectId,

@@ -3,7 +3,7 @@ var app = angular.module("bookingApp", ["ngRoute", "bookingApp.Auth", "bookingAp
 app.controller("mainCntrl", ["$scope", function ($scope) {
 
 
-}])
+}]);
 
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -25,6 +25,6 @@ app.config(["$routeProvider", function ($routeProvider) {
 
         .otherwise({
             redirectTo: "/home"
-        })
+        });
 
-}])
+}]);

@@ -4,31 +4,39 @@
 
         <form>
             <div class="form-group">
-                <label for="name">Company Name</label>
+                <label>Company Name</label>
                 <input type="text" id="companyName" class="form-control" ng-model="company.companyName">
             </div>
 
             <div class="form-group">
-                <label for="name">Business Type</label>
-                <select class="form-control" ng-model="company.businessType">
-                    <option>H</option>
+                <label>Business Type</label>
+                <select type="text" class="form-control" ng-model="company.businessType">
+                    <option>Hairstylist/Barber</option>
+                    <option>Home Improvement/Repair</option>
+                    <option>Educational Services</option>
+                    <option>Sports/Training</option>
+                    <option>Music & Arts</option>
+                    <option>Domestic Services</option>
+                    <option>Childcare</option>
+                    <option>Tech/IT</option>
+                    <option>Food/Catering</option>
+                    <option>Other</option>
                 </select>
-                <input type="text" id="name" class="form-control" ng-model="user.lastname">
             </div>
 
             <div class="form-group">
-                <label for="name">Email</label>
-                <input type="text" id="name" class="form-control" ng-model="user.email">
+                <label>Email</label>
+                <input type="email" id="companyEmail" class="form-control" ng-model="company.email">
             </div>
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" class="form-control" ng-model="user.username">
+                <input type="text" id="username" class="form-control" ng-model="company.username">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" ng-model="user.password">
+                <input type="password" id="password" class="form-control" ng-model="company.password">
             </div>
 
             <div class="form-group">

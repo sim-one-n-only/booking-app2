@@ -7,7 +7,7 @@ var Company = require("../models/company-schema");
 var jwt = require("jsonwebtoken");
 var config = require("../config");
 
-companyRoutes.post("/companylogin", function (req, res) {
+companyRoutes.post("/login", function (req, res) {
     console.log(req.body);
     Company.findOne({username: req.body.username}, function (err, company) {
         if (err) return res.status(500).send(err);

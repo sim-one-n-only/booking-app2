@@ -9,12 +9,10 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: "components/company-auth/company-signup/company-signup.html",
             controller: "companySignupCntrl"
         })
-
         .when("/company-login", {
             templateUrl: "components/company-auth/company-login/company-login.html",
             controller: "companyLoginCntrl"
         })
-
         .when("/company-logout", {
             templateUrl: "components/company-auth/company-logout/company-logout.html",
             controller: "companyLogoutCntrl"

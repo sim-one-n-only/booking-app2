@@ -11,5 +11,9 @@ app.controller("loginCntrl", ["$scope", "$location", "userService", function ($s
         }, function (response) {
             alert(response.data.message);
         });
-    }
-}])
+    };
+
+    $scope.companyLogin = function () {
+        $location.path('/company-login');
+    };
+}]);
