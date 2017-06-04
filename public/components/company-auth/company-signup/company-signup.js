@@ -11,7 +11,7 @@ app.controller("companySignupCntrl", ["$scope", "$location", "companyService", f
             $scope.passwordMessage = "Passwords do not match!";
         } else {
             companyService.signup(company).then(function (response) {
-                $location.path("/login");
+                $location.path("/company-login");
             }, function (response) {
                 alert("There was a problem: " + response.data);
             });
