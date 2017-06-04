@@ -71,7 +71,7 @@ app.service("companyAuthInterceptor", ["$q", "$location", "companyTokenService",
     this.responseError = function (response) {
         if (response.status === 401) {
             companyTokenService.removeToken();
-            $location.path("/login");
+            $location.path("/company-login");
         }
         return $q.reject(response);
     };
